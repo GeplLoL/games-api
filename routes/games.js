@@ -17,3 +17,17 @@ router.get('/:gameId', async (req, res) => {
         res.status(500).send({ message: 'Error retrieving game', error }); // Send error response
     }
 });
+
+router.put('/:gameId', async (req, res) => {
+    try {
+        const game = await Game.findByIdAndUpdate(req.params.gameId, req.body, {
+            new: true,
+            runValidators: true,
+        });
+        if (!game) return res.status(404).send({ message: 'Game not found' });
+        res.send(game);
+    } catch (error) {
+        res.status(400).send({ message: 'Error updating game', error });
+    }
+});
+

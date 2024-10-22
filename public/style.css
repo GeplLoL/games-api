@@ -50,9 +50,8 @@ button[type="submit"]:hover {
     background-color: #218838;
 }
 
-/* Список игр */
 #gamesList {
-    width: 300px;
+    width: 400px;
     margin-top: 30px;
 }
 
@@ -72,6 +71,16 @@ button[type="submit"]:hover {
     align-items: center;
 }
 
+.game-info {
+    flex-grow: 1;
+    font-weight: bold;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+}
+
 #games li button {
     background-color: #dc3545;
     color: #ffffff;
@@ -87,7 +96,6 @@ button[type="submit"]:hover {
     background-color: #c82333;
 }
 
-/* Сообщения и уведомления */
 .message {
     background-color: #d4edda;
     color: #155724;

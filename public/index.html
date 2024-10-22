@@ -19,6 +19,17 @@
     </form>
 </div>
 
+<div class="form-container" id="editGameContainer" style="display: none;">
+    <h2>Muuda Mängu</h2>
+    <form id="editGameForm">
+        <input type="hidden" id="editGameId">
+        <input type="text" id="editTitle" placeholder="Mängu nimi" required>
+        <input type="text" id="editGenre" placeholder="Žanr" required>
+        <input type="number" id="editRating" placeholder="Hinnang (0-10)" required min="0" max="10">
+        <button type="submit">Salvesta Muudatused</button>
+    </form>
+</div>
+
 <div class="form-container">
     <h2>Otsi ja Filtreeri Mänge</h2>
     <form id="searchForm">
@@ -32,6 +43,8 @@
         <button type="submit">Filtreeri</button>
     </form>
 </div>
+
+
 
 <div id="gamesList">
     <h2>Kõik Mängud</h2>

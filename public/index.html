@@ -2,9 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Collection</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<h1>Games Collection</h1>
 
 <div class="form-container">
     <h2>Add New Game</h2>
@@ -16,5 +19,25 @@
     </form>
 </div>
 
+<div class="form-container">
+    <h2>Search and Filter Games</h2>
+    <form id="searchForm">
+        <input type="text" id="searchQuery" placeholder="Search by title or genre">
+        <button type="submit">Search</button>
+    </form>
+
+    <form id="filterForm">
+        <input type="text" id="filterGenre" placeholder="Filter by genre">
+        <input type="number" id="minRating" placeholder="Min rating (0-10)" min="0" max="10">
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<div id="gamesList">
+    <h2>All Games</h2>
+    <ul id="games"></ul>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

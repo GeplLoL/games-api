@@ -1,20 +1,43 @@
+const express = require('express');
+const Game = require('../models/game');
+const router = express.Router();
+
 router.post('/', async (req, res) => {
+    console.log('Request body:', req.body);
     try {
-        const game = new Game(req.body); // Create a new Game instance with the data from the request body
-        await game.save(); // Save the game to MongoDB
-        res.status(201).send(game);
+        const game = new Game(req.body);
+        await game.save();
+        res.status(201).json(game);
     } catch (error) {
-        res.status(400).send({ message: 'Error adding game', error });
+        console.error('Error saving game:', error);
+        res.status(400).json({ message: 'Error adding game', error: error.message });
+    }
+});
+
+
+
+router.get('/', async (req, res) => {
+    const { search } = req.query;
+    try {
+        const games = await Game.find({
+            $or: [
+                { title: new RegExp(search, 'i') },
+                { genre: new RegExp(search, 'i') }
+            ]
+        });
+        res.send(games);
+    } catch (error) {
+        res.status(500).send({ message: 'Error searching for games', error });
     }
 });
 
 router.get('/:gameId', async (req, res) => {
     try {
-        const game = await Game.findById(req.params.gameId); // Find the game by ID
-        if (!game) return res.status(404).send({ message: 'Game not found' }); // Handle case if game not found
-        res.send(game); // Send game details
+        const game = await Game.findById(req.params.gameId);
+        if (!game) return res.status(404).send({ message: 'Game not found' });
+        res.send(game);
     } catch (error) {
-        res.status(500).send({ message: 'Error retrieving game', error }); // Send error response
+        res.status(500).send({ message: 'Error retrieving game', error });
     }
 });
 
@@ -22,7 +45,7 @@ router.put('/:gameId', async (req, res) => {
     try {
         const game = await Game.findByIdAndUpdate(req.params.gameId, req.body, {
             new: true,
-            runValidators: true,
+            runValidators: true
         });
         if (!game) return res.status(404).send({ message: 'Game not found' });
         res.send(game);
@@ -41,4 +64,18 @@ router.delete('/:gameId', async (req, res) => {
     }
 });
 
+router.get('/filter', async (req, res) => {
+    const { genre, minRating } = req.query;
+    try {
+        const filterCriteria = {};
+        if (genre) filterCriteria.genre = new RegExp(genre, 'i');
+        if (minRating) filterCriteria.rating = { $gte: Number(minRating) };
 
+        const games = await Game.find(filterCriteria);
+        res.send(games);
+    } catch (error) {
+        res.status(500).send({ message: 'Error filtering games', error });
+    }
+});
+
+module.exports = router;

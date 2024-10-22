@@ -1,18 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors');  // Подключаем CORS
+const cors = require('cors');
 
-// Инициализация Express приложения
 const app = express();
 
-// Используем CORS Middleware для всех маршрутов
-app.use(cors());  // Добавляем CORS для разрешения кросс-доменных запросов
+app.use(cors());
 
-// Middleware для обработки JSON тел запросов
 app.use(express.json());
 
-// Подключение к MongoDB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true

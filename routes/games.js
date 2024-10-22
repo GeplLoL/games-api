@@ -31,3 +31,14 @@ router.put('/:gameId', async (req, res) => {
     }
 });
 
+router.delete('/:gameId', async (req, res) => {
+    try {
+        const game = await Game.findByIdAndDelete(req.params.gameId);
+        if (!game) return res.status(404).send({ message: 'Game not found' });
+        res.send({ message: 'Game deleted successfully' });
+    } catch (error) {
+        res.status(500).send({ message: 'Error deleting game', error });
+    }
+});
+
+

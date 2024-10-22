@@ -1,40 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="et">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games Collection</title>
+    <title>Mängude Kollektsioon</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Games Collection</h1>
+<h1>Mängude Kollektsioon</h1>
 
 <div class="form-container">
-    <h2>Add New Game</h2>
+    <h2>Lisa Uus Mäng</h2>
     <form id="addGameForm">
-        <input type="text" id="title" placeholder="Game Title" required>
-        <input type="text" id="genre" placeholder="Genre" required>
-        <input type="number" id="rating" placeholder="Rating (0-10)" required min="0" max="10">
-        <button type="submit">Add Game</button>
+        <input type="text" id="title" placeholder="Mängu nimi" required>
+        <input type="text" id="genre" placeholder="Žanr" required>
+        <input type="number" id="rating" placeholder="Hinnang (0-10)" required min="0" max="10">
+        <button type="submit">Lisa Mäng</button>
     </form>
 </div>
 
 <div class="form-container">
-    <h2>Search and Filter Games</h2>
+    <h2>Otsi ja Filtreeri Mänge</h2>
     <form id="searchForm">
-        <input type="text" id="searchQuery" placeholder="Search by title or genre">
-        <button type="submit">Search</button>
+        <input type="text" id="searchQuery" placeholder="Otsi nime järgi">
+        <button type="submit">Otsi</button>
     </form>
 
     <form id="filterForm">
-        <input type="text" id="filterGenre" placeholder="Filter by genre">
-        <input type="number" id="minRating" placeholder="Min rating (0-10)" min="0" max="10">
-        <button type="submit">Filter</button>
+        <input type="text" id="filterGenre" placeholder="Filtreeri žanri järgi">
+        <input type="number" id="minRating" placeholder="Minimaalne hinnang (0-10)" min="0" max="10">
+        <button type="submit">Filtreeri</button>
     </form>
 </div>
 
 <div id="gamesList">
-    <h2>All Games</h2>
+    <h2>Kõik Mängud</h2>
     <ul id="games"></ul>
 </div>
 

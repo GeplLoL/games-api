@@ -17,19 +17,28 @@ router.post('/', async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-    const { search } = req.query;
     try {
-        const games = await Game.find({
-            $or: [
-                { title: new RegExp(search, 'i') },
-                { genre: new RegExp(search, 'i') }
-            ]
-        });
-        res.send(games);
+        console.log('Request query:', req.query); // Логируем параметры запроса
+        const { search, genre, minRating } = req.query;
+        const filterCriteria = {};
+
+        if (search) {
+            filterCriteria.title = new RegExp(search, 'i');
+        }
+        if (genre) {
+            filterCriteria.genre = new RegExp(genre, 'i');
+        }
+        if (minRating) {
+            filterCriteria.rating = { $gte: parseInt(minRating, 10) };
+        }
+
+        const games = await Game.find(filterCriteria);
+        res.json(games);
     } catch (error) {
-        res.status(500).send({ message: 'Error searching for games', error });
+        res.status(500).json({ message: 'Error fetching games', error: error.message });
     }
 });
+
 
 router.get('/:gameId', async (req, res) => {
     try {

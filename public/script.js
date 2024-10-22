@@ -21,3 +21,22 @@ document.getElementById('addGameForm').addEventListener('submit', function(event
         })
         .catch(error => console.error('Error adding game:', error));
 });
+
+function fetchGames() {
+    fetch('/api/games')
+        .then(response => response.json())
+        .then(games => {
+            const gamesList = document.getElementById('games');
+            gamesList.innerHTML = ''; // Clear previous games
+            games.forEach(game => {
+                const li = document.createElement('li');
+                li.textContent = `${game.title} - ${game.genre} - Rating: ${game.rating}`;
+                gamesList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching games:', error));
+}
+
+// Initially fetch games when page loads
+fetchGames();
+

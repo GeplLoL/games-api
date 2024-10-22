@@ -37,6 +37,27 @@ function fetchGames() {
         .catch(error => console.error('Error fetching games:', error));
 }
 
-// Initially fetch games when page loads
+function deleteGame(gameId) {
+    fetch(`/api/games/${gameId}`, {
+        method: 'DELETE',
+    })
+        .then(() => {
+            fetchGames(); // Refresh the list of games after deletion
+        })
+        .catch(error => console.error('Error deleting game:', error));
+}
+
+// Adding Delete button in each game listing
+games.forEach(game => {
+    // Existing code to display games...
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = () => deleteGame(game._id);
+    li.appendChild(deleteButton);
+});
+
+
 fetchGames();
+
+
 
